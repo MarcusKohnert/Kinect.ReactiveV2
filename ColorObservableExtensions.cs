@@ -10,7 +10,7 @@ namespace Kinect.ReactiveV2
         /// Selects the color data from the color stream.
         /// </summary>
         /// <param name="source">The source observable.</param>
-        /// <returns>An observable sequence of skeletons.</returns>
+        /// <returns>An observable sequence of colorData.</returns>
         public static IObservable<byte[]> SelectColorData(this IObservable<ColorFrameArrivedEventArgs> source, byte[] frameData)
         {
             if (source == null) throw new ArgumentNullException("source");

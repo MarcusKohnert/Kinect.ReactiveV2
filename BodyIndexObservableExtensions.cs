@@ -10,7 +10,7 @@ namespace Kinect.ReactiveV2
         /// Selects the data from the body index stream.
         /// </summary>
         /// <param name="source">The source observable.</param>
-        /// <returns>An observable sequence of skeletons.</returns>
+        /// <returns>An observable sequence of bodyIndex data.</returns>
         public static IObservable<byte[]> SelectBodyIndexData(this IObservable<BodyIndexFrameArrivedEventArgs> source, byte[] frameData)
         {
             if (source == null) throw new ArgumentNullException("source");

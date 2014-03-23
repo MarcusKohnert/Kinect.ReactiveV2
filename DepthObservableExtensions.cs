@@ -10,7 +10,7 @@ namespace Kinect.ReactiveV2
         /// Selects the bodies from the body stream.
         /// </summary>
         /// <param name="source">The source observable.</param>
-        /// <returns>An observable sequence of skeletons.</returns>
+        /// <returns>An observable sequence of depthData.</returns>
         public static IObservable<ushort[]> SelectDepthData(this IObservable<DepthFrameArrivedEventArgs> source, ushort[] frameData)
         {
             if (source == null) throw new ArgumentNullException("source");

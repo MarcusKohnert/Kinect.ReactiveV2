@@ -12,7 +12,7 @@ namespace Kinect.ReactiveV2
         /// Selects the bodies from the body stream.
         /// </summary>
         /// <param name="source">The source observable.</param>
-        /// <returns>An observable sequence of skeletons.</returns>
+        /// <returns>An observable sequence of bodies.</returns>
         public static IObservable<Body[]> SelectBodies(this IObservable<BodyFrameArrivedEventArgs> source, Body[] bodies)
         {
             if (source == null) throw new ArgumentNullException("source");
@@ -31,28 +31,30 @@ namespace Kinect.ReactiveV2
         }
 
         /// <summary>
-        /// Selects the bodies from the body stream.
+        /// Selects the tracked bodies from the body stream. This observable produces only values if there is at least one tracked body.
         /// </summary>
         /// <param name="source">The source observable.</param>
-        /// <returns>An observable sequence of skeletons.</returns>
+        /// <returns>An observable sequence of tracked bodies.</returns>
         public static IObservable<IEnumerable<Body>> SelectTracked(this IObservable<Body[]> source)
         {
             if (source == null) throw new ArgumentNullException("source");
 
-            return source.Select(bodies =>
-            {
-                return bodies.Where(b => b.IsTracked);
-            });
+            return source.Select(bodies => bodies.Where(b => b.IsTracked))
+                         .Where(bodies => bodies.Any());
         }
 
         /// <summary>
         /// Selects the JointType of the person from the bodies collection.
         /// </summary>
         /// <param name="source">The source observable.</param>
-        /// <returns>An observable sequence of skeletons.</returns>
-        public static IObservable<Joint> SelectJointOf(this IObservable<Body[]> source, ulong trackingId, JointType jointType)
+        /// <param name="trackingId">The persons tracking id.</param>
+        /// <param name="jointType">The type of joint to be tracked.</param>
+        /// <param name="wherePredicate">An optional predicate to filter. Default value is (joint => joint.TrackingState != TrackingState.NotTracked).</param>
+        /// <returns>An observable sequence of bodies.</returns>
+        public static IObservable<Joint> SelectJointOf(this IObservable<Body[]> source, ulong trackingId, JointType jointType, Func<Joint, bool> wherePredicate = null)
         {
             if (source == null) throw new ArgumentNullException("source");
+            if (wherePredicate == null) wherePredicate = j => j.TrackingState != TrackingState.NotTracked;
 
             return source.Select(bodies =>
             {
@@ -65,14 +67,14 @@ namespace Kinect.ReactiveV2
                 {
                     return new Joint { TrackingState = TrackingState.NotTracked };
                 }
-            }).Where(j => j.TrackingState != TrackingState.NotTracked);
+            }).Where(wherePredicate);
         }
 
         /// <summary>
         /// Selects the JointType from the bodies collection.
         /// </summary>
         /// <param name="source">The source observable.</param>
-        /// <returns>An observable sequence of skeletons.</returns>
+        /// <returns>An observable sequence of joints.</returns>
         public static IObservable<IEnumerable<Joint>> SelectJoints(this IObservable<Body[]> source, JointType jointType)
         {
             if (source == null) throw new ArgumentNullException("source");
