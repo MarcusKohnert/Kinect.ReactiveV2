@@ -44,6 +44,19 @@ namespace Kinect.ReactiveV2
         }
 
         /// <summary>
+        /// Selects the tracked bodies from the body stream. This observable produces only values if there is at least one tracked body.
+        /// </summary>
+        /// <param name="source">The source observable.</param>
+        /// <returns>An observable sequence of tracked bodies.</returns>
+        public static IObservable<Body> SelectTracked(this IObservable<Body[]> source, ulong trackingId)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+
+            return source.Select(bodies => bodies.FirstOrDefault(b => b.IsTracked && b.TrackingId == trackingId))
+                         .Where(body => body != null);
+        }
+
+        /// <summary>
         /// Selects the JointType of the person from the bodies collection.
         /// </summary>
         /// <param name="source">The source observable.</param>
