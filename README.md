@@ -6,7 +6,7 @@ This project contains extension methods to ease the use of the Kinect V2 SDK wit
 “This is preliminary software and/or hardware and APIs are preliminary and subject to change”
 
 ##Examples
-###BodyIndexObservable
+###BodyIndexFrameArrivedObservable
 ```C#
 using System.Linq;
 using System.Reactive;
