@@ -65,6 +65,7 @@
     <Compile Include="BodyIndexObservableExtensions.cs" />
     <Compile Include="BodyObservableExtensions.cs" />
     <Compile Include="ColorObservableExtensions.cs" />
+    <Compile Include="InfraredObservableExtensions.cs" />
     <Compile Include="DepthObservableExtensions.cs" />
     <Compile Include="KinectSensorExtensions.cs" />
     <Compile Include="ReSubscribingObserver.cs" />

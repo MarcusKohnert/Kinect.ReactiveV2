@@ -4,14 +4,14 @@ using System.Reactive.Linq;
 
 namespace Kinect.ReactiveV2
 {
-    public static class DepthObservableExtensions
+    public static class InfraredObservableExtensions
     {
         /// <summary>
-        /// Selects the depth data from the DepthFrame stream.
+        /// Selects the infrared data from the infrared stream.
         /// </summary>
         /// <param name="source">The source observable.</param>
-        /// <returns>An observable sequence of depthData.</returns>
-        public static IObservable<ushort[]> SelectDepthData(this IObservable<DepthFrameArrivedEventArgs> source, ushort[] frameData)
+        /// <returns>An observable sequence of infraredData.</returns>
+        public static IObservable<ushort[]> SelectInfraredData(this IObservable<InfraredFrameArrivedEventArgs> source, ushort[] frameData)
         {
             if (source == null) throw new ArgumentNullException("source");
 

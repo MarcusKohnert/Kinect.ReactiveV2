@@ -158,6 +158,43 @@ namespace Kinect.ReactiveV2
         }
 
         /// <summary>
+        /// Converts the InfraredFrameArrived event to an observable sequence.
+        /// </summary>
+        /// <param name="kinectSensor">The kinect sensor.</param>
+        /// <returns>The observable sequence.</returns>
+        public static IObservable<InfraredFrameArrivedEventArgs> InfraredFrameArrivedObservable(this KinectSensor kinectSensor)
+        {
+            if (kinectSensor == null) throw new ArgumentNullException("kinectSensor");
+
+            return Observable.Create<InfraredFrameArrivedEventArgs>(observer =>
+            {
+                var reader = kinectSensor.InfraredFrameSource.OpenReader();
+
+                var disposable = kinectSensor.InfraredFrameArrivedObservable(reader)
+                                             .Subscribe(x => observer.OnNext(x),
+                                                        e => observer.OnError(e),
+                                                        () => observer.OnCompleted());
+
+                return new CompositeDisposable { disposable, reader };
+            });
+        }
+
+        /// <summary>
+        /// Converts the InfraredFrameArrived event to an observable sequence and uses the specified reader.
+        /// </summary>
+        /// <param name="kinectSensor">The kinect sensor.</param>
+        /// <param name="kinectSensor">The reader to be used to subscribe to the FrameArrived event.</param>
+        /// <returns>The observable sequence.</returns>
+        public static IObservable<InfraredFrameArrivedEventArgs> InfraredFrameArrivedObservable(this KinectSensor kinectSensor, InfraredFrameReader reader)
+        {
+            if (kinectSensor == null) throw new ArgumentNullException("kinectSensor");
+
+            return Observable.FromEventPattern<InfraredFrameArrivedEventArgs>(h => reader.FrameArrived += h,
+                                                                              h => reader.FrameArrived -= h)
+                             .Select(e => e.EventArgs);
+        }
+
+        /// <summary>
         /// Converts the MultiSourceFrameArrived event to an observable sequence.
         /// </summary>
         /// <param name="kinectSensor">The kinect sensor.</param>
@@ -212,7 +249,7 @@ namespace Kinect.ReactiveV2
                                    .SelectBodies(bodies)
                                    .Subscribe(bs =>
                                    {
-                                       bs.Where(b => b != null & b.IsTracked)
+                                       bs.Where(b => b != null && b.IsTracked)
                                          .Where(b => bodiesInScene.ContainsKey(b.TrackingId) == false) // were not yet in scene
                                          .ForEach(b =>
                                          {
