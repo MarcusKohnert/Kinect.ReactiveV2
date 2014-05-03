@@ -1,4 +1,9 @@
-﻿using Microsoft.Kinect;
+﻿#if NETFX_CORE
+using WindowsPreview.Kinect;
+#else
+    using Microsoft.Kinect;
+#endif
+
 using System;
 using System.Reactive.Linq;
 
@@ -11,7 +16,7 @@ namespace Kinect.ReactiveV2
         /// </summary>
         /// <param name="source">The source observable.</param>
         /// <returns>An observable sequence of colorData.</returns>
-        public static IObservable<byte[]> SelectColorData(this IObservable<ColorFrameArrivedEventArgs> source, byte[] frameData)
+        public static IObservable<byte[]> SelectColorData(this IObservable<ColorFrameArrivedEventArgs> source, byte[] frameData, ColorImageFormat colorImageFormat = ColorImageFormat.Bgra)
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -21,7 +26,14 @@ namespace Kinect.ReactiveV2
                 {
                     if (frame == null) return frameData;
 
-                    frame.CopyRawFrameDataToArray(frameData);
+                    if (frame.RawColorImageFormat == ColorImageFormat.Bgra)
+                    {
+                        frame.CopyRawFrameDataToArray(frameData);
+                    }
+                    else
+                    {
+                        frame.CopyConvertedFrameDataToArray(frameData, colorImageFormat);
+                    }
 
                     return frameData;
                 }

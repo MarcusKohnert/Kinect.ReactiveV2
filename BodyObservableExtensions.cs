@@ -1,4 +1,9 @@
-﻿using Microsoft.Kinect;
+﻿#if NETFX_CORE
+using WindowsPreview.Kinect;
+#else
+    using Microsoft.Kinect;
+#endif
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

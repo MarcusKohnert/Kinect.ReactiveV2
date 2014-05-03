@@ -1,4 +1,9 @@
-﻿using Microsoft.Kinect;
+﻿#if NETFX_CORE
+using WindowsPreview.Kinect;
+#else
+    using Microsoft.Kinect;
+#endif
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +14,19 @@ namespace Kinect.ReactiveV2
 {
     public static class KinectSensorExtensions
     {
+        /// <summary>
+        /// Converts the IsAvailableChanged event to an observable sequence.
+        /// </summary>
+        /// <param name="kinectSensor">The kinect sensor.</param>
+        /// <returns>The observable sequence.</returns>
+        public static IObservable<bool> AvailabilityObservable(this KinectSensor kinectSensor)
+        {
+            if (kinectSensor == null) throw new ArgumentNullException("kinectSensor");
+
+            return Observable.FromEventPattern<IsAvailableChangedEventArgs>(kinectSensor, "IsAvailableChanged")
+                             .Select(e => e.EventArgs.IsAvailable);
+        }
+
         /// <summary>
         /// Converts the BodyFrameArrived event to an observable sequence.
         /// </summary>
@@ -41,9 +59,7 @@ namespace Kinect.ReactiveV2
         {
             if (kinectSensor == null) throw new ArgumentNullException("kinectSensor");
 
-            return Observable.FromEventPattern<BodyFrameArrivedEventArgs>(h => reader.FrameArrived += h,
-                                                                          h => reader.FrameArrived -= h)
-                             .Select(e => e.EventArgs);
+            return FrameArrivedEventArgsFromEventPattern<BodyFrameArrivedEventArgs>(reader);
         }
 
         /// <summary>
@@ -78,9 +94,7 @@ namespace Kinect.ReactiveV2
         {
             if (kinectSensor == null) throw new ArgumentNullException("kinectSensor");
 
-            return Observable.FromEventPattern<BodyIndexFrameArrivedEventArgs>(h => reader.FrameArrived += h,
-                                                                               h => reader.FrameArrived -= h)
-                             .Select(e => e.EventArgs);
+            return FrameArrivedEventArgsFromEventPattern<BodyIndexFrameArrivedEventArgs>(reader);
         }
 
         /// <summary>
@@ -115,9 +129,7 @@ namespace Kinect.ReactiveV2
         {
             if (kinectSensor == null) throw new ArgumentNullException("kinectSensor");
 
-            return Observable.FromEventPattern<ColorFrameArrivedEventArgs>(h => reader.FrameArrived += h,
-                                                                           h => reader.FrameArrived -= h)
-                             .Select(e => e.EventArgs);
+            return FrameArrivedEventArgsFromEventPattern<ColorFrameArrivedEventArgs>(reader);
         }
 
         /// <summary>
@@ -152,9 +164,7 @@ namespace Kinect.ReactiveV2
         {
             if (kinectSensor == null) throw new ArgumentNullException("kinectSensor");
 
-            return Observable.FromEventPattern<DepthFrameArrivedEventArgs>(h => reader.FrameArrived += h,
-                                                                           h => reader.FrameArrived -= h)
-                             .Select(e => e.EventArgs);
+            return FrameArrivedEventArgsFromEventPattern<DepthFrameArrivedEventArgs>(reader);
         }
 
         /// <summary>
@@ -189,9 +199,7 @@ namespace Kinect.ReactiveV2
         {
             if (kinectSensor == null) throw new ArgumentNullException("kinectSensor");
 
-            return Observable.FromEventPattern<InfraredFrameArrivedEventArgs>(h => reader.FrameArrived += h,
-                                                                              h => reader.FrameArrived -= h)
-                             .Select(e => e.EventArgs);
+            return FrameArrivedEventArgsFromEventPattern<InfraredFrameArrivedEventArgs>(reader);
         }
 
         /// <summary>
@@ -228,9 +236,7 @@ namespace Kinect.ReactiveV2
         {
             if (kinectSensor == null) throw new ArgumentNullException("kinectSensor");
 
-            return Observable.FromEventPattern<MultiSourceFrameArrivedEventArgs>(h => reader.MultiSourceFrameArrived += h,
-                                                                                 h => reader.MultiSourceFrameArrived -= h)
-                             .Select(e => e.EventArgs);
+            return FrameArrivedEventArgsFromEventPattern<MultiSourceFrameArrivedEventArgs>(reader);
         }
 
         /// <summary>
@@ -270,6 +276,12 @@ namespace Kinect.ReactiveV2
                                    e => observer.OnError(e),
                                    () => observer.OnCompleted());
             });
+        }
+
+        private static IObservable<T> FrameArrivedEventArgsFromEventPattern<T>(object target)
+        {
+            return Observable.FromEventPattern<T>(target, "FrameArrived")
+                             .Select(e => e.EventArgs);
         }
     }
 }

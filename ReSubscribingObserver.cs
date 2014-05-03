@@ -11,7 +11,7 @@ namespace Kinect.ReactiveV2
         private Action<Exception> _OnError;
 
         public ReSubscribingObserver(IObservable<T> observable, Action<T> _OnNext)
-            : this(observable, _OnNext, new Action<Exception>(e => Console.WriteLine(e.Message)))
+            : this(observable, _OnNext, new Action<Exception>(e => { }))
         { }
 
         public ReSubscribingObserver(IObservable<T> observable, Action<T> _OnNext, Action<Exception> _OnError)
