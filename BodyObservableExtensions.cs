@@ -17,6 +17,7 @@ namespace Kinect.ReactiveV2
         /// Selects the bodies from the body stream.
         /// </summary>
         /// <param name="source">The source observable.</param>
+        /// <param name="bodies">The bodies array. If it's null it'll be initialized.</param>
         /// <returns>An observable sequence of bodies.</returns>
         public static IObservable<Body[]> SelectBodies(this IObservable<BodyFrameArrivedEventArgs> source, Body[] bodies)
         {
@@ -27,6 +28,7 @@ namespace Kinect.ReactiveV2
                 using (var frame = _.FrameReference.AcquireFrame())
                 {
                     if (frame == null) return bodies;
+                    if(bodies == null) bodies = new Body[frame.BodyCount];
 
                     frame.GetAndRefreshBodyData(bodies);
 

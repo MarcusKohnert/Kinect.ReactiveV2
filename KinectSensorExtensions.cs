@@ -246,8 +246,9 @@ namespace Kinect.ReactiveV2
         /// <returns>The observable sequence.</returns>
         public static IObservable<SceneChangedEventArgs> SceneChanges(this KinectSensor kinectSensor)
         {
-            var bodiesInScene = new Dictionary<ulong, Body>(kinectSensor.BodyFrameSource.BodyCount);
-            var bodies = new Body[kinectSensor.BodyFrameSource.BodyCount];
+            // TODO: Hack, In update 06 2014 the BodyCount property was removed on BodyFrameSource.
+            var bodiesInScene = new Dictionary<ulong, Body>(6);
+            Body[] bodies = null;
 
             return Observable.Create<SceneChangedEventArgs>(observer =>
             {
@@ -280,8 +281,16 @@ namespace Kinect.ReactiveV2
 
         private static IObservable<T> FrameArrivedEventArgsFromEventPattern<T>(object target)
         {
-            return Observable.FromEventPattern<T>(target, "FrameArrived")
-                             .Select(e => e.EventArgs);
+            try
+            {
+                return Observable.FromEventPattern<T>(target, "FrameArrived")
+                                 .Select(e => e.EventArgs);
+            }
+            catch (Exception e)
+            {
+                string s = "";
+                throw;
+            }
         }
     }
 }
