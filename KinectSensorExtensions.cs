@@ -1,7 +1,7 @@
 ﻿#if NETFX_CORE
 using WindowsPreview.Kinect;
 #else
-    using Microsoft.Kinect;
+using Microsoft.Kinect;
 #endif
 
 using System;
@@ -281,16 +281,8 @@ namespace Kinect.ReactiveV2
 
         private static IObservable<T> FrameArrivedEventArgsFromEventPattern<T>(object target)
         {
-            try
-            {
-                return Observable.FromEventPattern<T>(target, "FrameArrived")
-                                 .Select(e => e.EventArgs);
-            }
-            catch (Exception e)
-            {
-                string s = "";
-                throw;
-            }
+            return Observable.FromEventPattern<T>(target, "FrameArrived")
+                             .Select(e => e.EventArgs);
         }
     }
 }
