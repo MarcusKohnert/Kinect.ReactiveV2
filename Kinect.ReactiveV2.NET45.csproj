@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudioBeamObservableExtensions.cs" />
     <Compile Include="BodyIndexObservableExtensions.cs" />
     <Compile Include="BodyObservableExtensions.cs" />
     <Compile Include="ColorObservableExtensions.cs" />

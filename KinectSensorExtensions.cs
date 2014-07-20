@@ -28,6 +28,40 @@ namespace Kinect.ReactiveV2
         }
 
         /// <summary>
+        /// Converts the FrameCaptured event to an observable sequence.
+        /// </summary>
+        /// <param name="kinectSensor">The kinect sensor.</param>
+        /// <returns>The observable sequence.</returns>
+        public static IObservable<AudioBeamFrameArrivedEventArgs> AudioBeamFrameArrivedObservable(this KinectSensor kinectSensor)
+        {
+            if (kinectSensor == null) throw new ArgumentNullException("kinectSensor");
+
+            return Observable.Create<AudioBeamFrameArrivedEventArgs>(observer =>
+            {
+                var reader = kinectSensor.AudioSource.OpenReader();
+
+                var disposable = kinectSensor.AudioBeamFrameArrivedObservable(reader)
+                                             .Subscribe(x => observer.OnNext(x),
+                                                        e => observer.OnError(e),
+                                                        () => observer.OnCompleted());
+
+                return new CompositeDisposable { disposable, reader };
+            });
+        }
+
+        /// <summary>
+        /// Converts the AudioBeamFrameArrived event to an observable sequence.
+        /// </summary>
+        /// <param name="kinectSensor">The kinect sensor.</param>
+        /// <returns>The observable sequence.</returns>
+        public static IObservable<AudioBeamFrameArrivedEventArgs> AudioBeamFrameArrivedObservable(this KinectSensor kinectSensor, AudioBeamFrameReader reader)
+        {
+            if (kinectSensor == null) throw new ArgumentNullException("kinectSensor");
+
+            return FrameArrivedEventArgsFromEventPattern<AudioBeamFrameArrivedEventArgs>(reader);
+        }
+
+        /// <summary>
         /// Converts the BodyFrameArrived event to an observable sequence.
         /// </summary>
         /// <param name="kinectSensor">The kinect sensor.</param>
