@@ -70,7 +70,6 @@
     <Compile Include="InfraredObservableExtensions.cs" />
     <Compile Include="DepthObservableExtensions.cs" />
     <Compile Include="KinectSensorExtensions.cs" />
-    <Compile Include="ReSubscribingObserver.cs" />
     <Compile Include="SceneChangedEventArgs.cs" />
     <Compile Include="SceneChangedType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
