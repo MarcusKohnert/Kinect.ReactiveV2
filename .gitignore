@@ -1,5 +1,7 @@
 GitHub
 nugetDrop
+.gitignore
+.gitattributes
 
 #################
 ## Visual Studio
