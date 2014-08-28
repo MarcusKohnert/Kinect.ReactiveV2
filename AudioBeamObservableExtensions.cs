@@ -7,6 +7,7 @@ using Microsoft.Kinect;
 using System;
 using System.Reactive.Linq;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Kinect.ReactiveV2
 {
@@ -17,18 +18,27 @@ namespace Kinect.ReactiveV2
         /// </summary>
         /// <param name="source">The source observable.</param>
         /// <returns>An observable sequence of bodyIndex data.</returns>
-        public static IObservable<IReadOnlyList<AudioBeamFrame>> SelectAudioBeamFrames(this IObservable<AudioBeamFrameArrivedEventArgs> source)
+        public static IObservable<IReadOnlyList<AudioBeamSubFrame>> SelectAudioBeamFrames(this IObservable<AudioBeamFrameArrivedEventArgs> source)
         {
             if (source == null) throw new ArgumentNullException("source");
+            var subFramesLengthInBytes = KinectSensor.GetDefault()
+                                                     .AudioSource
+                                                     .SubFrameLengthInBytes;
 
             return source.Select(_ =>
             {
-                using (var frame = _.FrameReference.AcquireBeamFrames())
-                {
-                    if (frame == null) return new List<AudioBeamFrame>().AsReadOnly();
+                var frame = _.FrameReference.AcquireBeamFrames();
 
-                    return new List<AudioBeamFrame>(frame).AsReadOnly();
-                }
+                if (frame == null) return new ReadOnlyCollection<AudioBeamSubFrame>(new List<AudioBeamSubFrame>());
+
+                var disposableFrame = frame as IDisposable;
+
+                var data = frame[0].SubFrames;
+
+                if (frame != null)
+                    disposableFrame.Dispose();
+
+                return data;
             });
         }
     }
