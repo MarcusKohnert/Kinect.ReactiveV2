@@ -29,8 +29,9 @@ namespace GripClicksWPF
         private void MainWindowLoaded(object sender, RoutedEventArgs args)
         {
             Body[] bodies = null;
+            var reader = this.kinectSensor.BodyFrameSource.OpenReader();
             var bodyFrameObservable = this.kinectSensor
-                                          .BodyFrameArrivedObservable()
+                                          .BodyFrameArrivedObservable(reader)
                                           .SelectBodies(bodies);
 
             this.SubscribeToSceneChanges(bodyFrameObservable);
