@@ -14,8 +14,9 @@ namespace GripClicks
             kinect.Open();
 
             Body[] bodies = null;
+            var reader = kinect.BodyFrameSource.OpenReader();
 
-            var tracked = kinect.BodyFrameArrivedObservable()
+            var tracked = kinect.BodyFrameArrivedObservable(reader)
                                 .SelectBodies(bodies)
                                 .SelectTracked();
 

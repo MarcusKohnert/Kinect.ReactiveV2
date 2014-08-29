@@ -39,8 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Kinect.ReactiveV2">
-      <HintPath>..\..\packages\Kinect.ReactiveV2.0.3.0.0\lib\Kinect.ReactiveV2.dll</HintPath>
+    <Reference Include="Kinect.ReactiveV2, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Kinect.ReactiveV2.0.5.0.0\lib\net\Kinect.ReactiveV2.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Kinect, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
