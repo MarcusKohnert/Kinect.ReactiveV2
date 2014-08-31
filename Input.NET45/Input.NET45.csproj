@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ManipulatableModelExtensions.cs" />
+    <Compile Include="ModelObservable.cs" />
+    <Compile Include="PressableModelExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

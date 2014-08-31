@@ -71,6 +71,12 @@
     <Compile Include="..\Input.NET45\ManipulatableModelExtensions.cs">
       <Link>ManipulatableModelExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Input.NET45\ModelObservable.cs">
+      <Link>ModelObservable.cs</Link>
+    </Compile>
+    <Compile Include="..\Input.NET45\PressableModelExtensions.cs">
+      <Link>PressableModelExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Input.NET45\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>

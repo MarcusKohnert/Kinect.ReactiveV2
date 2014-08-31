@@ -5,8 +5,15 @@ This project contains extension methods to ease the use of the <a href="http://w
 
 “This is preliminary software and/or hardware and APIs are preliminary and subject to change”
 
-##Examples
-###SceneChanges
+##NuGet Installation
+<code>PM> Install-Package Kinect.ReactiveV2</code>
+
+<code>PM> Install-Package Kinect.ReactiveV2.Input</code>
+
+##Samples
+
+###Kinect.ReactiveV2
+####SceneChanges
 ```C#
 using System;
 using System.Linq;
@@ -31,7 +38,7 @@ sensor.SceneChanges()
       });
 ```
 
-###BodyIndexFrameArrivedObservable
+####BodyIndexFrameArrivedObservable
 ```C#
 using System.Linq;
 using System.Reactive;
@@ -49,3 +56,5 @@ sensor.BodyIndexFrameArrivedObservable()
       .Subscribe(data => someBitmap.WritePixels(rect, data, stride, 0));
 
 ```
+
+###Kinect.ReactiveV2.Input

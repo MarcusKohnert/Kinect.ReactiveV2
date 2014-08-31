@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="PressableControllerWinStore.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PressableControllerWinStore"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style TargetType="local:CustomPressable">
+            <Setter Property="Margin" Value="50" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="50"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+        </Grid.RowDefinitions>
+    <Grid Grid.Row="0"></Grid>
+    <StackPanel Grid.Row="1" Orientation="Horizontal" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <local:CustomPressable>
+            <TextBlock Text="Press me" />
+        </local:CustomPressable>
+        <local:CustomPressable>
+            <TextBlock Text="Press me" />
+        </local:CustomPressable>
+        <local:CustomPressable>
+            <TextBlock Text="Press me" />
+        </local:CustomPressable>
+        <local:CustomPressable>
+            <TextBlock Text="Press me" />
+        </local:CustomPressable>
+    </StackPanel>
+    </Grid>
+</Page>

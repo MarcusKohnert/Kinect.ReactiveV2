@@ -1,0 +1,14 @@
+<Application x:Class="PressableControllerWinStore.App" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"	
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"	
+             xmlns:local="using:PressableControllerWinStore">	
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="HandPointerStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <x:String x:Key="AppName">PressableControllerWinStore</x:String>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

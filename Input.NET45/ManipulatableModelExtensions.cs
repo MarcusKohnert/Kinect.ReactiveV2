@@ -33,8 +33,7 @@ namespace Kinect.ReactiveV2.Input
 
         private static IObservable<T> GetObservable<T>(ManipulatableModel model, string eventName)
         {
-            return Observable.FromEventPattern<T>(model, eventName)
-                             .Select(_ => _.EventArgs);
+            return ModelObservable.GetObservable<ManipulatableModel, T>(model, eventName);
         }
     }
 }
