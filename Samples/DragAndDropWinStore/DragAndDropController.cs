@@ -79,6 +79,7 @@ namespace DragAndDropWinStore
         public void Dispose()
         {
             this.eventSubscriptions.Dispose();
+            this.element = (WeakReference)null;
         }
     }
 }
