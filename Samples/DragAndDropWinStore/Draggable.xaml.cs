@@ -14,7 +14,8 @@ namespace DragAndDropWinStore
         public IKinectController CreateController(IInputModel inputModel, KinectRegion kinectRegion)
         {
             // Only one controller is instantiated for one Control
-            return new DragAndDropController(this, new ManipulatableModel(inputModel.GestureRecognizer.GestureSettings, this), kinectRegion);
+            var model = new ManipulatableModel(inputModel.GestureRecognizer.GestureSettings, this);
+            return new DragAndDropController(this, model, kinectRegion);
         }
 
         public bool IsManipulatable { get { return true; } }
