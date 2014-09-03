@@ -64,7 +64,7 @@ public DragAndDropController(FrameworkElement element, ManipulatableModel model,
 ```
 
 The <code>ManipulatableModel</code> provides four events you can subscribe to in order to react to user input.
-This sample uses the nuget package **[Kinect.ReactiveV2.Input](https://www.nuget.org/packages/Kinect.ReactiveV2.Input/)** that provides specific [Rx](http://rx.codeplex.com/)-extension methods to subscribe to these events.
+This sample uses the nuget package [Kinect.ReactiveV2.Input](https://www.nuget.org/packages/Kinect.ReactiveV2.Input/) that provides specific [Rx](http://rx.codeplex.com/)-extension methods to subscribe to these events.
 
 ```c#
 ...
