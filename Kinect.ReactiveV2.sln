@@ -34,9 +34,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DragAndDropWinStore", "Samp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PressableControllerWinStore", "Samples\PressableControllerWinStore\PressableControllerWinStore.csproj", "{C17C945B-820E-4471-B17C-B2297E6D7A5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Face.NET45", "Face.NET45\Face.NET45.csproj", "{73FE5B32-76C2-44AE-9A0F-C925E8B974C6}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
+		SccNumberOfProjects = 12
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.saxsys.de/tfs/saxonia_intern
 		SccLocalPath0 = .
@@ -74,6 +76,9 @@ Global
 		SccProjectTopLevelParentUniqueName10 = Kinect.ReactiveV2.sln
 		SccProjectName10 = Samples/PressableControllerWinStore
 		SccLocalPath10 = Samples\\PressableControllerWinStore
+		SccProjectUniqueName11 = Face.NET45\\Face.NET45.csproj
+		SccProjectName11 = Face.NET45
+		SccLocalPath11 = Face.NET45
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -226,6 +231,16 @@ Global
 		{C17C945B-820E-4471-B17C-B2297E6D7A5C}.Release|x86.ActiveCfg = Release|x86
 		{C17C945B-820E-4471-B17C-B2297E6D7A5C}.Release|x86.Build.0 = Release|x86
 		{C17C945B-820E-4471-B17C-B2297E6D7A5C}.Release|x86.Deploy.0 = Release|x86
+		{73FE5B32-76C2-44AE-9A0F-C925E8B974C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73FE5B32-76C2-44AE-9A0F-C925E8B974C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73FE5B32-76C2-44AE-9A0F-C925E8B974C6}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{73FE5B32-76C2-44AE-9A0F-C925E8B974C6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{73FE5B32-76C2-44AE-9A0F-C925E8B974C6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{73FE5B32-76C2-44AE-9A0F-C925E8B974C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73FE5B32-76C2-44AE-9A0F-C925E8B974C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73FE5B32-76C2-44AE-9A0F-C925E8B974C6}.Release|ARM.ActiveCfg = Release|Any CPU
+		{73FE5B32-76C2-44AE-9A0F-C925E8B974C6}.Release|x64.ActiveCfg = Release|Any CPU
+		{73FE5B32-76C2-44AE-9A0F-C925E8B974C6}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
