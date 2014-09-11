@@ -20,7 +20,7 @@ namespace DragAndDropWinStore
         private ManipulatableModel inputModel;
         private IDisposable eventSubscriptions;
 
-        public DragAndDropController(FrameworkElement element, ManipulatableModel model, KinectRegion kinectRegion)
+        public DragAndDropController(Draggable element, ManipulatableModel model, KinectRegion kinectRegion)
         {
             this.element = new WeakReference(element);
             this.kinectRegion = kinectRegion;
@@ -32,7 +32,7 @@ namespace DragAndDropWinStore
             this.eventSubscriptions = new CompositeDisposable 
             {
                 this.inputModel.ManipulationStartedObservable()
-                               .Subscribe(_ => VisualStateManager.GoToState(this.Control, "Focused", true)),
+                               .Subscribe(_ => VisualStateManager.GoToState(this.Control, "Entered", true)),
 
                 this.inputModel.ManipulationInertiaStartingObservable()
                                .Subscribe(_ => Debug.WriteLine(string.Format("ManipulationInertiaStarting: {0}, ", DateTime.Now))),
@@ -41,7 +41,7 @@ namespace DragAndDropWinStore
                                .Subscribe(_ => OnManipulationUpdated(_)),
 
                 this.inputModel.ManipulationCompletedObservable()
-                               .Subscribe(_ => VisualStateManager.GoToState(this.Control, "Unfocused", true)),
+                               .Subscribe(_ => VisualStateManager.GoToState(this.Control, "Left", true)),
             };
         }
 

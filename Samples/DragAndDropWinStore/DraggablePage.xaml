@@ -9,20 +9,29 @@
     <Page.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="50"/>
+            <Setter Property="Margin" Value="10" />
         </Style>
     </Page.Resources>
     <Canvas Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <local:Draggable Canvas.Top="100" Canvas.Left="100">
-            <TextBlock Text="Drag Me" />
+            <local:Draggable.DragContent>
+                <TextBlock Text="Drag Me" />
+            </local:Draggable.DragContent>
         </local:Draggable>
         <local:Draggable Canvas.Top="200" Canvas.Left="100">
-            <TextBlock Text="Drag Me" />
+            <local:Draggable.DragContent>
+                <TextBlock Text="Drag Me" />
+            </local:Draggable.DragContent>
         </local:Draggable>
         <local:Draggable Canvas.Top="300" Canvas.Left="100">
-            <TextBlock Text="Drag Me" />
+            <local:Draggable.DragContent>
+                <TextBlock Text="Drag Me" />
+            </local:Draggable.DragContent>
         </local:Draggable>
         <local:Draggable Canvas.Top="400" Canvas.Left="100">
-            <TextBlock Text="Drag Me" />
+            <local:Draggable.DragContent>
+                <TextBlock Text="Drag Me" />
+            </local:Draggable.DragContent>
         </local:Draggable>
     </Canvas>
 </Page>

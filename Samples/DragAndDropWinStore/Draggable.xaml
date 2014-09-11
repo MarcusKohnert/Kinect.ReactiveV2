@@ -7,9 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
-    <Border x:Name="border" BorderThickness="5" BorderBrush="Azure">
-        <ContentPresenter />
+    d:DesignWidth="400"
+    x:Name="uc">        
+    <Border x:Name="border" BorderThickness="2" BorderBrush="Azure">
+        <ContentPresenter Content="{Binding ElementName=uc, Path=DragContent}"/>
     </Border>
 
     <VisualStateManager.VisualStateGroups>
@@ -19,16 +20,35 @@
                     <DoubleAnimation Storyboard.TargetName="border"
                                      Storyboard.TargetProperty="BorderThickness"
                                      To="5" 
-                                     Duration="0" />
+                                     Duration="00:00:01" />
                 </Storyboard>
             </VisualState>
             <VisualState x:Name="Unfocused">
                 <Storyboard>
                     <DoubleAnimation Storyboard.TargetName="border"
                                      Storyboard.TargetProperty="BorderThickness"
+                                     To="2" 
+                                     Duration="00:00:01" />
+                </Storyboard>
+            </VisualState>
+        </VisualStateGroup>
+        
+        <VisualStateGroup x:Name="PointerStates">
+            <VisualState x:Name="Entered">
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="border"
+                                     Storyboard.TargetProperty="BorderThickness"
+                                     To="5" 
+                                     Duration="00:00:01" />
+                </Storyboard>
+            </VisualState>
+            <VisualState x:Name="Left">
+                <!--<Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="border"
+                                     Storyboard.TargetProperty="BorderThickness"
                                      To="1" 
                                      Duration="0" />
-                </Storyboard>
+                </Storyboard>-->
             </VisualState>
         </VisualStateGroup>
     </VisualStateManager.VisualStateGroups>
