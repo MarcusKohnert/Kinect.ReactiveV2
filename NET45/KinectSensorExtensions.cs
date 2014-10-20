@@ -237,6 +237,41 @@ namespace Kinect.ReactiveV2
         }
 
         /// <summary>
+        /// Converts the LongExposureInfraredFrameArrived event to an observable sequence.
+        /// </summary>
+        /// <param name="kinectSensor">The kinect sensor.</param>
+        /// <returns>The observable sequence.</returns>
+        public static IObservable<LongExposureInfraredFrameArrivedEventArgs> LongExposureInfraredFrameArrivedObservable(this KinectSensor kinectSensor)
+        {
+            if (kinectSensor == null) throw new ArgumentNullException("kinectSensor");
+
+            return Observable.Create<LongExposureInfraredFrameArrivedEventArgs>(observer =>
+            {
+                var reader = kinectSensor.LongExposureInfraredFrameSource.OpenReader();
+
+                var disposable = kinectSensor.LongExposureInfraredFrameArrivedObservable(reader)
+                                             .Subscribe(x => observer.OnNext(x),
+                                                        e => observer.OnError(e),
+                                                        () => observer.OnCompleted());
+
+                return new CompositeDisposable { disposable, reader };
+            });
+        }
+
+        /// <summary>
+        /// Converts the LongExposureInfraredFrameArrived event to an observable sequence and uses the specified reader.
+        /// </summary>
+        /// <param name="kinectSensor">The kinect sensor.</param>
+        /// <param name="kinectSensor">The reader to be used to subscribe to the FrameArrived event.</param>
+        /// <returns>The observable sequence.</returns>
+        public static IObservable<LongExposureInfraredFrameArrivedEventArgs> LongExposureInfraredFrameArrivedObservable(this KinectSensor kinectSensor, LongExposureInfraredFrameReader reader)
+        {
+            if (kinectSensor == null) throw new ArgumentNullException("kinectSensor");
+
+            return FrameArrivedEventArgsFromEventPattern<LongExposureInfraredFrameArrivedEventArgs>(reader);
+        }
+
+        /// <summary>
         /// Converts the MultiSourceFrameArrived event to an observable sequence.
         /// </summary>
         /// <param name="kinectSensor">The kinect sensor.</param>
