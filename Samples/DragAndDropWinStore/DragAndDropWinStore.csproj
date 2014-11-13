@@ -184,9 +184,9 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Kinect.ReactiveV2.Input, Version=0.1.0.0, Culture=neutral, processorArchitecture=AMD64">
+    <Reference Include="Kinect.ReactiveV2.Input, Version=0.2.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Kinect.ReactiveV2.Input.0.1.0.0\lib\win81\Kinect.ReactiveV2.Input.dll</HintPath>
+      <HintPath>..\..\packages\Kinect.ReactiveV2.Input.0.2.0.0\lib\win81\Kinect.ReactiveV2.Input.dll</HintPath>
     </Reference>
     <Reference Include="System.Interactive">
       <HintPath>..\..\packages\Ix-Main.1.2.2\lib\portable-windows8+net45+wp8\System.Interactive.dll</HintPath>
